@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Hồ sơ người dùng{% endblock %}
+
+{% block content %}
+<h2>Hồ sơ của bạn</h2>
+<p>Tên người dùng: {{ current_user.username }}</p>
+<a href="{{ url_for('logout') }}">Đăng xuất</a>
+
+<h3>Đổi mật khẩu</h3>
+<form method="POST" action="{{ url_for('change_password') }}">
+    <label for="current_password">Mật khẩu hiện tại:</label>
+    <input type="password" id="current_password" name="current_password" required>
+    
+    <label for="new_password">Mật khẩu mới:</label>
+    <input type="password" id="new_password" name="new_password" required>
+    
+    <button type="submit">Đổi mật khẩu</button>
+</form>
+{% endblock %}

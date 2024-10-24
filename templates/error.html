@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Lỗi{% endblock %}
+
+{% block content %}
+<h2>Đã xảy ra lỗi</h2>
+<p>{{ error_message }}</p>
+<a href="{{ url_for('home') }}">Trở về trang chính</a>
+{% endblock %}

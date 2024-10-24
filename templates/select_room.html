@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Chọn phòng{% endblock %}
+
+{% block content %}
+<h2>Chọn phòng trò chuyện</h2>
+<ul>
+    {% for room in rooms %}
+    <li>
+        <a href="{{ url_for('chat', room=room.room_id) }}">{{ room.room_id }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('create_room') }}">Tạo phòng mới</a>
+{% endblock %}

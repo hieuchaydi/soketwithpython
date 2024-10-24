@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Trang chính{% endblock %}
+
+{% block content %}
+<h2>Chào mừng, {{ username }}!</h2>
+<p>Chọn một phòng trò chuyện từ danh sách bên dưới hoặc tạo một phòng mới.</p>
+<a href="{{ url_for('select_room') }}">Chọn phòng</a>
+<a href="{{ url_for('create_room') }}">Tạo phòng mới</a>
+{% endblock %}

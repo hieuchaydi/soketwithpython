@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Phòng trò chuyện{% endblock %}
+
+{% block content %}
+<h2>Phòng: {{ room }}</h2>
+<div id="messages"></div>
+<form id="messageForm">
+    <input type="text" id="messageInput" placeholder="Nhập tin nhắn" required>
+    <button type="submit">Gửi</button>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+<script>
+    const socket = io();
+    const room = "{{ room }}";
+    const username = "{{ current_user.username }}";
+
+    socket.emit('join', { username: username, room: room });
+
+    const messagesDiv = document.getElementById("messages");
+    const messageForm = document.getElementById("messageForm");
+    const messageInput = document.getElementById("messageInput");
+
+    messageForm.onsubmit = function(e) {
+        e.preventDefault();
+        const message = messageInput.value;
+        socket.emit('message', { room: room, message: message, username: username });
+        messageInput.value = '';
+    };
+
+    socket.on('message', function(msg) {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = msg;
+        messagesDiv.appendChild(messageElement);
+    });
+</script>
+{% endblock %}

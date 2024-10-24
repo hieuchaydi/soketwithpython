@@ -1,0 +1,17 @@
+chat_app/
+├── app.py
+├── models.py
+├── templates/
+│   ├── base.html
+│   ├── home.html
+│   ├── login.html
+│   ├── register.html
+│   ├── select_room.html
+│   ├── create_room.html
+│   ├── chat.html
+│   ├── enter_password.html
+│   ├── admin.html
+│   └── profile.html
+└── static/
+    ├── style.css
+    └── main.js

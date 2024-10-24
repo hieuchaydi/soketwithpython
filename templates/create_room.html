@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Tạo phòng{% endblock %}
+
+{% block content %}
+<h2>Tạo phòng trò chuyện</h2>
+<form method="POST">
+    <label for="room_id">Tên phòng:</label>
+    <input type="text" id="room_id" name="room_id" required>
+    
+    <label for="is_private">Phòng riêng tư:</label>
+    <input type="checkbox" id="is_private" name="is_private">
+    
+    <div id="password_div" style="display:none;">
+        <label for="password">Mật khẩu:</label>
+        <input type="password" id="password" name="password">
+    </div>
+    
+    <button type="submit">Tạo phòng</button>
+</form>
+
+<script>
+    const checkBox = document.getElementById("is_private");
+    const passwordDiv = document.getElementById("password_div");
+
+    checkBox.addEventListener("change", function() {
+        passwordDiv.style.display = this.checked ? "block" : "none";
+    });
+</script>
+{% endblock %}

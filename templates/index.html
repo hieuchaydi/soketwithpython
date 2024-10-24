@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Chat Room</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const socket = io.connect('http://' + document.domain + ':' + location.port);
+            const username = "{{ username }}";
+            const room = "Main Room";
+
+            socket.emit('join', {username: username, room: room});
+
+            socket.on('message', (msg) => {
+                const chatBox = document.getElementById('chat');
+                chatBox.innerHTML += '<p>' + msg + '</p>';
+            });
+
+            document.getElementById('sendbutton').onclick = function() {
+                const message = document.getElementById('message').value;
+                socket.emit('message', {username: username, room: room, message: message});
+                document.getElementById('message').value = '';
+            };
+        });
+    </script>
+</head>
+<body>
+    <h1>Chat Room - {{ username }}</h1>
+    <div id="chat" style="border: 1px solid black; height: 300px; overflow-y: scroll;"></div>
+    <input type="text" id="message" placeholder="Enter your message...">
+    <button id="sendbutton">Send</button>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

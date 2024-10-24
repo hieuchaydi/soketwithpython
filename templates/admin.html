@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Quản trị{% endblock %}
+
+{% block content %}
+<h2>Quản lý người dùng và phòng</h2>
+
+<h3>Người dùng</h3>
+<ul>
+    {% for user in users %}
+    <li>
+        {{ user.username }}
+        {% if not user.is_admin %}
+        <a href="{{ url_for('delete_user', user_id=user.id) }}">Xóa</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+<h3>Phòng</h3>
+<ul>
+    {% for room in rooms %}
+    <li>
+        {{ room.room_id }}
+        <a href="{{ url_for('delete_room', room_id=room.id) }}">Xóa</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
